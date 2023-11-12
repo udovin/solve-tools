@@ -1,0 +1,28 @@
+{
+    "name": "rust-rustc-1.64",
+    "config": {
+        "language": "Rust",
+        "compiler": "rustc-1.64.0",
+        "extensions": [
+            "rs"
+        ],
+        "compile": {
+            "command": "rustc --cfg online_judge -o solution solution.rs",
+            "environ": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "source": "solution.rs",
+            "binary": "solution",
+            "workdir": "/home/judge"
+        },
+        "execute": {
+            "command": "./solution",
+            "environ": [],
+            "binary": "solution",
+            "workdir": "/home/judge"
+        }
+    },
+    "map_settings": [
+        "polygon.rust"
+    ]
+}

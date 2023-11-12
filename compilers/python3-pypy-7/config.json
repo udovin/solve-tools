@@ -1,0 +1,21 @@
+{
+    "name": "python3-pypy-7",
+    "config": {
+        "language": "Python3",
+        "compiler": "pypy-7.3.12",
+        "extensions": [
+            "py"
+        ],
+        "execute": {
+            "command": "pypy3 solution.py",
+            "environ": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "binary": "solution.py",
+            "workdir": "/home/judge"
+        }
+    },
+    "map_settings": [
+        "polygon.python.pypy3"
+    ]
+}

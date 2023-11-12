@@ -1,0 +1,26 @@
+{
+    "name": "go-go-1.19",
+    "config": {
+        "language": "Go",
+        "compiler": "go-1.19.9",
+        "extensions": [
+            "go"
+        ],
+        "compile": {
+            "command": "go build solution.go",
+            "environ": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "HOME=/home/judge"
+            ],
+            "source": "solution.go",
+            "binary": "solution",
+            "workdir": "/home/judge"
+        },
+        "execute": {
+            "command": "./solution",
+            "environ": [],
+            "binary": "solution",
+            "workdir": "/home/judge"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "name": "c11-gcc-12",
+    "config": {
+        "language": "C11",
+        "compiler": "gcc-12.2.1",
+        "extensions": [
+            "c",
+            "h"
+        ],
+        "compile": {
+            "command": "gcc --std=c11 -O2 -DONLINE_JUDGE -o solution solution.c",
+            "environ": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "source": "solution.c",
+            "binary": "solution",
+            "workdir": "/home/judge"
+        },
+        "execute": {
+            "command": "./solution",
+            "environ": [],
+            "binary": "solution",
+            "workdir": "/home/judge"
+        }
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "name": "java-openjdk-19",
+    "config": {
+        "language": "Java",
+        "compiler": "openjdk-19.0.2",
+        "extensions": [
+            "java"
+        ],
+        "compile": {
+            "command": "judge-java-compile solution.java solution.jar",
+            "environ": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "source": "solution.java",
+            "binary": "solution.jar",
+            "workdir": "/home/judge"
+        },
+        "execute": {
+            "command": "java -Xmx1024M -DONLINE_JUDGE=true -Duser.language=en -Duser.region=US -Duser.variant=US -jar solution.jar",
+            "environ": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "binary": "solution.jar",
+            "workdir": "/home/judge"
+        }
+    },
+    "map_settings": [
+        "polygon.java11",
+        "polygon.java8"
+    ]
+}

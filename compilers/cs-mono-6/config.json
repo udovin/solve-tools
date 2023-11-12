@@ -1,0 +1,27 @@
+{
+    "name": "cs-mono-6",
+    "config": {
+        "language": "C#",
+        "compiler": "mono-6.12.0",
+        "extensions": [
+            "cs"
+        ],
+        "compile": {
+            "command": "mcs solution.cs -out:solution.exe",
+            "environ": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "source": "solution.cs",
+            "binary": "solution.exe",
+            "workdir": "/home/judge"
+        },
+        "execute": {
+            "command": "mono solution.exe",
+            "environ": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "binary": "solution.exe",
+            "workdir": "/home/judge"
+        }
+    }
+}

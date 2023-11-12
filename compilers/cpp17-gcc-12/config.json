@@ -1,0 +1,35 @@
+{
+    "name": "cpp17-gcc-12",
+    "config": {
+        "language": "C++17",
+        "compiler": "gcc-12.2.1",
+        "extensions": [
+            "cpp",
+            "h",
+            "hpp",
+            "c++",
+            "cxx"
+        ],
+        "compile": {
+            "command": "g++ --std=c++17 -O2 -DONLINE_JUDGE -o solution solution.cpp",
+            "environ": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "source": "solution.cpp",
+            "binary": "solution",
+            "workdir": "/home/judge"
+        },
+        "execute": {
+            "command": "./solution",
+            "environ": [],
+            "binary": "solution",
+            "workdir": "/home/judge"
+        }
+    },
+    "map_settings": [
+        "polygon.cpp.g++11",
+        "polygon.cpp.g++14",
+        "polygon.cpp.g++17",
+        "polygon.cpp.msys2-mingw64-9-g++17"
+    ]
+}
