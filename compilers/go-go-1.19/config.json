@@ -10,7 +10,8 @@
             "command": "go build solution.go",
             "environ": [
                 "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-                "HOME=/home/judge"
+                "HOME=/home/judge",
+                "GOMAXPROCS=1"
             ],
             "source": "solution.go",
             "binary": "solution",
@@ -18,7 +19,9 @@
         },
         "execute": {
             "command": "./solution",
-            "environ": [],
+            "environ": [
+                "GOMAXPROCS=1"
+            ],
             "binary": "solution",
             "workdir": "/home/judge"
         }

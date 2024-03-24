@@ -2,7 +2,7 @@
     "name": "python3-python-3.10",
     "config": {
         "language": "Python3",
-        "compiler": "python-3.10.13",
+        "compiler": "python-3.10.14",
         "extensions": [
             "py"
         ],

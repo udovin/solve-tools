@@ -4,7 +4,7 @@ WORKDIR /src/compile
 COPY compile.go /src/compile
 RUN go build compile.go
 
-FROM alpine:3.17.0
+FROM alpine:3.19.0
 ARG USER_ID=1000
 ARG GROUP_ID=1000
 COPY --from=build /src/compile/compile /bin/judge-java-compile
