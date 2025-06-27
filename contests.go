@@ -56,8 +56,8 @@ func registerContestScope(ctx *Context) error {
 	}
 	for _, user := range users.Users {
 		form := api.CreateContestParticipantForm{
-			ScopeUserID: &user.ID,
-			Kind:        api.RegularParticipant,
+			AccountID: user.ID,
+			Kind:      api.RegularParticipant,
 		}
 		_, err := ctx.Client.CreateContestParticipant(ctx, contest, form)
 		if err != nil {
@@ -133,15 +133,22 @@ func downloadContestSolutions(ctx *Context) error {
 			}
 		}()
 	}
-	solutions, err := ctx.Client.ObserveContestSolutions(ctx, contest)
-	if err != nil {
-		return err
-	}
-	for _, solution := range solutions.Solutions {
-		select {
-		case queue <- solution:
-		case <-ctx.Done():
-			return ctx.Err()
+	var beginID int64
+	for {
+		solutions, err := ctx.Client.ObserveContestSolutions(ctx, contest, beginID)
+		if err != nil {
+			return err
+		}
+		for _, solution := range solutions.Solutions {
+			select {
+			case queue <- solution:
+			case <-ctx.Done():
+				return ctx.Err()
+			}
+		}
+		beginID = solutions.NextBeginID
+		if beginID == 0 {
+			break
 		}
 	}
 	once.Do(func() { close(queue) })
