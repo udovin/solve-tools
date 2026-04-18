@@ -6,6 +6,6 @@ RUN addgroup -g $GROUP_ID -S judge && \
     apk add --no-cache \
     binutils=2.39-r2 && \
     apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    fpc=3.2.2-r2
+    fpc=3.2.2-r4
 USER judge:judge
 WORKDIR /home/judge

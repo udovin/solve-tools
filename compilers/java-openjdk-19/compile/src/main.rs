@@ -63,46 +63,51 @@ fn write_manifest(path: &Path, class_name: &str) -> Result<(), String> {
 ///                 ^
 fn parse_javac_diagnostics(stderr: &str, source_name: &str) -> Vec<Diagnostic> {
     let mut diagnostics = Vec::new();
-    // Pattern: filename.java:LINE: error: MESSAGE  or  filename.java:LINE: warning: MESSAGE
-    let pattern = format!(
-        r"{}:(\d+): (error|warning): (.+)",
+    // Positioned pattern: filename.java:LINE: error|warning|note: MESSAGE
+    let positioned = Regex::new(&format!(
+        r"{}:(\d+): (error|warning|note): (.+)",
         regex::escape(source_name)
-    );
-    let re = Regex::new(&pattern).unwrap();
+    )).unwrap();
+    // Global note pattern: Note: MESSAGE
+    let global_note = Regex::new(r"^Note: (.+)$").unwrap();
     // Caret pattern — a line with only spaces and a single ^
     let caret_re = Regex::new(r"^(\s*)\^$").unwrap();
 
     let lines: Vec<&str> = stderr.lines().collect();
     let mut i = 0;
     while i < lines.len() {
-        if let Some(caps) = re.captures(lines[i]) {
+        if let Some(caps) = positioned.captures(lines[i]) {
             let line_num: usize = caps[1].parse().unwrap_or(1);
             let level = caps[2].to_string();
             let message = caps[3].to_string();
 
             // Look ahead for source line + caret to determine column.
             let mut column = None;
-            // Next line is the source line, line after is the caret.
             if i + 2 < lines.len() {
                 if let Some(caret_caps) = caret_re.captures(lines[i + 2]) {
-                    // Column is the number of unicode code points before ^.
                     column = Some(caret_caps[1].chars().count());
-                    i += 2; // skip source line and caret line
+                    i += 2;
                 }
             }
 
-            let span = Some(Span {
-                start: Position {
-                    line: line_num.saturating_sub(1), // 0-based
-                    column: column.unwrap_or(0),
-                },
-                end: None,
-            });
-
             diagnostics.push(Diagnostic {
                 level,
-                span,
+                span: Some(Span {
+                    start: Position {
+                        line: line_num.saturating_sub(1),
+                        column: column.unwrap_or(0),
+                    },
+                    end: None,
+                }),
                 message,
+                code: None,
+                details: Vec::new(),
+            });
+        } else if let Some(caps) = global_note.captures(lines[i]) {
+            diagnostics.push(Diagnostic {
+                level: "note".to_string(),
+                span: None,
+                message: caps[1].to_string(),
                 code: None,
                 details: Vec::new(),
             });
@@ -139,7 +144,10 @@ fn try_main() -> Result<(), (i32, String)> {
     let class_name = get_class_name(&input_file)
         .map_err(|e| (1, e))?;
 
-    let dir = input_file.parent().unwrap_or(Path::new("."));
+    let dir = match input_file.parent() {
+        Some(p) if !p.as_os_str().is_empty() => p,
+        _ => Path::new("."),
+    };
     let java_file = dir.join(format!("{}.java", class_name));
     let manifest_file = dir.join("manifest.txt");
 
@@ -184,15 +192,19 @@ fn try_main() -> Result<(), (i32, String)> {
         let javac_status = javac.wait()
             .map_err(|e| (1, format!("cannot wait javac: {}", e)))?;
 
-        // Parse diagnostics if requested.
+        // Parse diagnostics if requested. Write NDJSON (one per line).
         if let Some(ref diag_path) = diagnostics_file {
             let source_name = java_file
                 .file_name()
                 .unwrap_or_default()
                 .to_string_lossy();
             let diagnostics = parse_javac_diagnostics(&captured_stderr, &source_name);
-            if let Ok(json) = serde_json::to_string(&diagnostics) {
-                fs::write(diag_path, json).ok();
+            if let Ok(mut file) = fs::File::create(diag_path) {
+                for d in &diagnostics {
+                    if let Ok(json) = serde_json::to_string(d) {
+                        let _ = writeln!(file, "{}", json);
+                    }
+                }
             }
         }
 
