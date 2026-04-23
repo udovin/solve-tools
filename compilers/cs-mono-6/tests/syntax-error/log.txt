@@ -1,0 +1,2 @@
+solution.cs(4,4): error CS1525: Unexpected symbol `}'
+Compilation failed: 1 error(s), 0 warnings

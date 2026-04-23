@@ -1,0 +1,9 @@
+Free Pascal Compiler version 3.2.2 [2024/06/20] for x86_64
+Copyright (c) 1993-2021 by Florian Klaempfl and others
+Target OS: Linux for x86-64
+Compiling solution.pas
+solution.pas(3,5) Error: Identifier not found "x"
+solution.pas(4,1) Error: Illegal expression
+solution.pas(4,4) Fatal: Syntax error, ";" expected but "." found
+Fatal: Compilation aborted
+Error: /usr/bin/ppcx64 returned an error exitcode

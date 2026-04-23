@@ -1,0 +1,2 @@
+{"level":"error","span":{"start":{"line":2,"column":0},"end":{"line":2,"column":1}},"message":"expected expression, found `}`"}
+{"level":"error","message":"aborting due to previous error"}
