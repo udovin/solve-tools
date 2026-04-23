@@ -8,12 +8,13 @@
             "h"
         ],
         "compile": {
-            "command": "gcc --std=c11 -O2 -DONLINE_JUDGE -o solution solution.c",
+            "command": "judge-gcc-compile diagnostics.ndjson gcc --std=c11 -O2 -DONLINE_JUDGE -o solution solution.c",
             "environ": [
                 "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
             ],
             "source": "solution.c",
             "binary": "solution",
+            "diagnostics": "diagnostics.ndjson",
             "workdir": "/home/judge"
         },
         "execute": {

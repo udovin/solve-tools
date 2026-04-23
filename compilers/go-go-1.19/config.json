@@ -1,29 +1,26 @@
 {
-    "name": "go-go-1.19",
-    "config": {
-        "language": "Go",
-        "compiler": "go-1.19.9",
-        "extensions": [
-            "go"
-        ],
-        "compile": {
-            "command": "go build solution.go",
-            "environ": [
-                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-                "HOME=/home/judge",
-                "GOMAXPROCS=1"
-            ],
-            "source": "solution.go",
-            "binary": "solution",
-            "workdir": "/home/judge"
-        },
-        "execute": {
-            "command": "./solution",
-            "environ": [
-                "GOMAXPROCS=1"
-            ],
-            "binary": "solution",
-            "workdir": "/home/judge"
-        }
+  "name": "go-go-1.19",
+  "config": {
+    "language": "Go",
+    "compiler": "go-1.19.9",
+    "extensions": ["go"],
+    "compile": {
+      "command": "judge-go-compile diagnostics.ndjson go build solution.go",
+      "environ": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "HOME=/home/judge",
+        "GOMAXPROCS=1"
+      ],
+      "source": "solution.go",
+      "binary": "solution",
+      "diagnostics": "diagnostics.ndjson",
+      "workdir": "/home/judge"
+    },
+    "execute": {
+      "command": "./solution",
+      "environ": ["GOMAXPROCS=1"],
+      "binary": "solution",
+      "workdir": "/home/judge"
     }
+  }
 }

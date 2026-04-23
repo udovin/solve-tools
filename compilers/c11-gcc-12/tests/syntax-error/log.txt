@@ -1,0 +1,5 @@
+[01m[Ksolution.c:[m[K In function '[01m[Kmain[m[K':
+[01m[Ksolution.c:3:1:[m[K [01;31m[Kerror: [m[Kexpected expression before '[01m[K}[m[K' token
+    3 | [01;31m[K}[m[K
+      | [01;31m[K^[m[K
+[01m[Ksolution.c:3:1:[m[K [01;31m[Kerror: [m[Kexpected declaration or statement at end of input

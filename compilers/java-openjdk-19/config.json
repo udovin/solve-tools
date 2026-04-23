@@ -7,14 +7,14 @@
             "java"
         ],
         "compile": {
-            "command": "judge-java-compile solution.java solution.jar",
+            "command": "judge-java-compile solution.java solution.jar diagnostics.ndjson",
             "environ": [
                 "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
-                "JAVA_TOOL_OPTIONS=-XX:ActiveProcessorCount=1 -Xmx1024M",
-                "GOMAXPROCS=1"
+                "JAVA_TOOL_OPTIONS=-XX:ActiveProcessorCount=1 -Xmx1024M"
             ],
             "source": "solution.java",
             "binary": "solution.jar",
+            "diagnostics": "diagnostics.ndjson",
             "workdir": "/home/judge"
         },
         "execute": {

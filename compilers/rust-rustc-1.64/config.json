@@ -7,12 +7,13 @@
             "rs"
         ],
         "compile": {
-            "command": "rustc --cfg online_judge -o solution solution.rs",
+            "command": "judge-rust-compile diagnostics.ndjson --cfg online_judge -o solution solution.rs",
             "environ": [
                 "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
             ],
             "source": "solution.rs",
             "binary": "solution",
+            "diagnostics": "diagnostics.ndjson",
             "workdir": "/home/judge"
         },
         "execute": {

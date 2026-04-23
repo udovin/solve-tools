@@ -1,25 +1,24 @@
 {
-    "name": "pascal-fpc-3.2",
-    "config": {
-        "language": "Pascal",
-        "compiler": "fpc-3.2.2",
-        "extensions": [
-            "pas"
-        ],
-        "compile": {
-            "command": "fpc solution.pas -osolution",
-            "environ": [
-                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-            ],
-            "source": "solution.pas",
-            "binary": "solution",
-            "workdir": "/home/judge"
-        },
-        "execute": {
-            "command": "./solution",
-            "environ": [],
-            "binary": "solution",
-            "workdir": "/home/judge"
-        }
+  "name": "pascal-fpc-3.2",
+  "config": {
+    "language": "Pascal",
+    "compiler": "fpc-3.2.2",
+    "extensions": ["pas"],
+    "compile": {
+      "command": "judge-fpc-compile diagnostics.ndjson fpc solution.pas -osolution",
+      "environ": [
+        "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      ],
+      "source": "solution.pas",
+      "binary": "solution",
+      "diagnostics": "diagnostics.ndjson",
+      "workdir": "/home/judge"
+    },
+    "execute": {
+      "command": "./solution",
+      "environ": [],
+      "binary": "solution",
+      "workdir": "/home/judge"
     }
+  }
 }
